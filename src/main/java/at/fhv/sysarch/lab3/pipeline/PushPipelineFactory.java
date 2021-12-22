@@ -2,10 +2,13 @@ package at.fhv.sysarch.lab3.pipeline;
 
 import at.fhv.sysarch.lab3.animation.AnimationRenderer;
 import at.fhv.sysarch.lab3.obj.Model;
+import at.fhv.sysarch.lab3.pipeline.stream.Sink;
+import at.fhv.sysarch.lab3.pipeline.stream.Source;
 import javafx.animation.AnimationTimer;
 
 public class PushPipelineFactory {
     public static AnimationTimer createPipeline(PipelineData pd) {
+        Source src = new Source();
         // TODO: push from the source (model)
 
         // TODO 1. perform model-view transformation from model to VIEW SPACE coordinates
@@ -28,6 +31,8 @@ public class PushPipelineFactory {
         // TODO 6. perform perspective division to screen coordinates
 
         // TODO 7. feed into the sink (renderer)
+        Sink sink = new Sink(pd.getGraphicsContext());
+        src.setSuccessor(sink);
 
         // returning an animation renderer which handles clearing of the
         // viewport and computation of the praction
@@ -50,6 +55,7 @@ public class PushPipelineFactory {
                 // TODO update model-view filter
 
                 // TODO trigger rendering of the pipeline
+                src.write(model.getFaces());
             }
         };
     }
