@@ -2,9 +2,9 @@ package at.fhv.sysarch.lab3.pipeline.stream;
 
 public class PushPipe<I> extends IStream<I, I> {
 
-    IStream<I, I> successor;
+    IStream<I, ?> successor;
 
-    public PushPipe(IStream<I, I> target) {
+    public PushPipe(IStream<I, ?> target) {
         this.successor = target;
     }
 

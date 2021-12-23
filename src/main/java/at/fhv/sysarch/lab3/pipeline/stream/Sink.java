@@ -1,12 +1,13 @@
 package at.fhv.sysarch.lab3.pipeline.stream;
 
 import at.fhv.sysarch.lab3.obj.Face;
+import at.fhv.sysarch.lab3.pipeline.data.Pair;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public class Sink extends IStream<Face, GraphicsContext> {
+public class Sink extends IStream<Pair<Face, Color>, GraphicsContext> {
 
     GraphicsContext graphicsContext;
 
@@ -15,9 +16,12 @@ public class Sink extends IStream<Face, GraphicsContext> {
     }
 
     @Override
-    public void write(Face in) {
-        graphicsContext.setStroke(Color.WHITE);
-        graphicsContext.strokeLine(in.getV1().getX() * 100, in.getV1().getY() * 100, in.getV2().getX() * 100, in.getV2().getY() * 100);
+    public void write(Pair<Face, Color> in) {
+        int multi = 100;
+        graphicsContext.setStroke(in.snd());
+        graphicsContext.strokeLine(in.fst().getV1().getX() * multi,
+                in.fst().getV1().getY() * multi,
+                in.fst().getV2().getX() * multi, in.fst().getV2().getY() * multi);
         //todo: rendering
     }
 

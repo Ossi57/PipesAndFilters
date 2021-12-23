@@ -18,5 +18,11 @@ public abstract class Filter<I, O> extends IStream<I, O> {
         this.successor = successor;
     }
 
+    public IStream<O, ?> getSuccessor() {
+        return successor;
+    }
 
+    public IStream<I, ?> getPredecessor() {
+        return predecessor;
+    }
 }
