@@ -80,13 +80,11 @@ public class PushPipelineFactory {
                 // TODO compute rotation in radians
                 radiant += fraction;
                 // TODO create new model rotation matrix using pd.modelRotAxis
+                // TODO compute updated model-view tranformation
+                // TODO update model-view filter
                 if(fraction % 2*Math.PI >= 1)
                     radiant = 0;
                 modelViewTransformation.setRotationMatrix(Matrices.rotate((radiant), pd.getModelRotAxis()));
-                // TODO compute updated model-view tranformation
-
-                // TODO update model-view filter
-
                 // TODO trigger rendering of the pipeline
                 src.write(model.getFaces());
             }

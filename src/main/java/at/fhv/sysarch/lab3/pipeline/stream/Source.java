@@ -1,6 +1,7 @@
 package at.fhv.sysarch.lab3.pipeline.stream;
 
 import at.fhv.sysarch.lab3.obj.Face;
+import at.fhv.sysarch.lab3.pipeline.Utils;
 import com.hackoeur.jglm.Vec4;
 
 
@@ -41,9 +42,7 @@ public class Source implements IStreamPush<List<Face>, Face>, IStreamPull<List<F
         //if no faces left, return delimiter face
         if(faces.size() == readCount) {
             readCount = 0;
-            return new Face(new Vec4(0, 0, 0, 0), new Vec4(0, 0, 0, 0),
-                    new Vec4(0, 0, 0, 0), new Vec4(0, 0, 0, 0),
-                    new Vec4(0, 0, 0, 0), new Vec4(0, 0, 0, 0));
+            return Utils.getDelimiterFace();
         }
         return faces.get(readCount++);
     }

@@ -48,9 +48,7 @@ public class DepthSortingFilter extends Filter<Face, Face> {
         if(queue.size() == 0){
             //reset isWaiting for next frame
             isWaiting = true;
-            return new Face(new Vec4(0, 0, 0, 0), new Vec4(0, 0, 0, 0),
-                new Vec4(0, 0, 0, 0), new Vec4(0, 0, 0, 0),
-                new Vec4(0, 0, 0, 0), new Vec4(0, 0, 0, 0));
+            return Utils.getDelimiterFace();
         }
         return queue.poll();
     }

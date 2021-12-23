@@ -38,6 +38,11 @@ public class Sink implements IStreamPush<Pair<Face, Color>, PipelineData>, IStre
                         new double[]{in.fst().getV1().getY(), in.fst().getV2().getY(), in.fst().getV3().getY()},
                         3
                 );
+                pipelineData.getGraphicsContext().strokePolygon(
+                        new double[]{in.fst().getV1().getX(), in.fst().getV2().getX(), in.fst().getV3().getX()},
+                        new double[]{in.fst().getV1().getY(), in.fst().getV2().getY(), in.fst().getV3().getY()},
+                        3
+                );
                 break;
             case WIREFRAME:
                 pipelineData.getGraphicsContext().strokePolygon(
