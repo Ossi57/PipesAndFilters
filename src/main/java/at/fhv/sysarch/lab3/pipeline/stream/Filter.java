@@ -2,27 +2,27 @@ package at.fhv.sysarch.lab3.pipeline.stream;
 
 
 
-public abstract class Filter<I, O> extends IStream<I, O> {
+public abstract class Filter<I, O> implements IStreamPush<I, O>, IStreamPull<I, O> {
 
-    private IStream<O, ?> successor;
-    private IStream<I, ?> predecessor;
+    private IStreamPush<O, ?> successor;
+    private IStreamPull<?, I> predecessor;
 
 
     public Filter() {}
 
-    public void setPredecessor(IStream<I, ?> predecessor){
+    public void setPredecessor(IStreamPull<?, I> predecessor){
         this.predecessor = predecessor;
     }
 
-    public void setSuccessor(IStream<O, ?> successor){
+    public void setSuccessor(IStreamPush<O, ?> successor){
         this.successor = successor;
     }
 
-    public IStream<O, ?> getSuccessor() {
+    public IStreamPush<O, ?> getSuccessor() {
         return successor;
     }
 
-    public IStream<I, ?> getPredecessor() {
+    public IStreamPull<?, I> getPredecessor() {
         return predecessor;
     }
 }

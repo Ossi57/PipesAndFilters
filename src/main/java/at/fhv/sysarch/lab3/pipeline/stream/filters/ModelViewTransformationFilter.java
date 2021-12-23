@@ -2,8 +2,9 @@ package at.fhv.sysarch.lab3.pipeline.stream.filters;
 
 import at.fhv.sysarch.lab3.obj.Face;
 import at.fhv.sysarch.lab3.pipeline.PipelineData;
+import at.fhv.sysarch.lab3.pipeline.Utils;
 import at.fhv.sysarch.lab3.pipeline.stream.Filter;
-import at.fhv.sysarch.lab3.pipeline.stream.IStream;
+import at.fhv.sysarch.lab3.pipeline.stream.IStreamPush;
 import com.hackoeur.jglm.Mat4;
 import com.hackoeur.jglm.Vec4;
 
@@ -16,10 +17,6 @@ public class ModelViewTransformationFilter extends Filter<Face, Face> {
         pipelineData = pd;
     }
 
-    @Override
-    public void setSuccessor(IStream<Face, ?> successor) {
-        super.setSuccessor(successor);
-    }
 
     public void setRotationMatrix(Mat4 rotate) {
         rotationMatrix = rotate;
@@ -48,6 +45,11 @@ public class ModelViewTransformationFilter extends Filter<Face, Face> {
 
     @Override
     public Face read() {
-        return null;
+        Face out = getPredecessor().read();
+        if(out == null)
+            return null;
+        if(Utils.checkIfDelimiterIsReached(out))
+            return out;
+        return process(out);
     }
 }

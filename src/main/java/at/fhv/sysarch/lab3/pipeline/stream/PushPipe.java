@@ -1,20 +1,15 @@
 package at.fhv.sysarch.lab3.pipeline.stream;
 
-public class PushPipe<I> extends IStream<I, I> {
+public class PushPipe<I> implements IStreamPush<I, I> {
 
-    IStream<I, ?> successor;
+    IStreamPush<I, ?> successor;
 
-    public PushPipe(IStream<I, ?> target) {
+    public PushPipe(IStreamPush<I, ?> target) {
         this.successor = target;
     }
 
     @Override
     public void write(I in) {
         successor.write(in);
-    }
-
-    @Override
-    public I read() {
-        return null;
     }
 }
